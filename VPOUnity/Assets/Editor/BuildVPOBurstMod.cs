@@ -16,7 +16,7 @@ public static class BuildVPOBurstMod
 	public static void BuildGame()
 	{
 		var projectFolder = Path.Combine(Application.dataPath, "..");
-		var defaultOutput = Path.GetFullPath(Path.Combine(projectFolder, "..", "..", "ValheimPerformanceOptimizations", "BurstOutput"));
+		var defaultOutput = Path.GetFullPath(Path.Combine(projectFolder, "..", "ValheimPerformanceOptimizations", "BurstOutput"));
 
 		var path = EditorUtility.SaveFolderPanel("Choose Final Mod Location", defaultOutput, "");
 		if (string.IsNullOrEmpty(path))
@@ -33,7 +33,7 @@ public static class BuildVPOBurstMod
 	public static void BuildGameBatch()
 	{
 		var projectFolder = Path.Combine(Application.dataPath, "..");
-		var defaultOutput = Path.GetFullPath(Path.Combine(projectFolder, "..", "..", "ValheimPerformanceOptimizations", "BurstOutput"));
+		var defaultOutput = Path.GetFullPath(Path.Combine(projectFolder, "..", "ValheimPerformanceOptimizations", "BurstOutput"));
 		BuildTo(defaultOutput);
 	}
 
