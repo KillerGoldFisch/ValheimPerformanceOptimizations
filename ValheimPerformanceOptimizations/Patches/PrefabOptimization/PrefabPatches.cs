@@ -120,10 +120,9 @@ public static class PrefabPatches
 		var patched = 0;
 		foreach (var particleSystem in prefab.GetComponentsInChildren<ParticleSystem>(true))
 		{
+			var go = particleSystem.gameObject;
 			var main = particleSystem.main;
-
-
-			var cullingMode = particleSystem.gameObject.name switch
+			ParticleSystemCullingMode? cullingMode = go.name switch
 			{
 				"flare" => ParticleSystemCullingMode.Pause,
 				"flames" => ParticleSystemCullingMode.PauseAndCatchup,
@@ -132,12 +131,21 @@ public static class PrefabPatches
 				"low_flames" => ParticleSystemCullingMode.PauseAndCatchup,
 				"sparcs (1)" => ParticleSystemCullingMode.PauseAndCatchup,
 				"smoke (1)" => ParticleSystemCullingMode.PauseAndCatchup,
-				_ => main.cullingMode,
+				_ => null,
 			};
 
-			main.cullingMode = cullingMode;
+			if (cullingMode.HasValue)
+			{
+				main.cullingMode = cullingMode.Value;
+			}
+
+			if (!cullingMode.HasValue && (go.GetComponent<Collider>() || go.GetComponent<Rigidbody>()))
+			{
+				continue;
+			}
+
 			// necessary to make the reflection renderer not re-simulate particles
-			particleSystem.gameObject.layer = LayerMask.NameToLayer("TransparentFX");
+			go.layer = LayerMask.NameToLayer("TransparentFX");
 			patched += 1;
 		}
 

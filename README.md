@@ -7,6 +7,10 @@ Please note that I have not tested this mod on servers outside
 
 You can use the mod on either the server or the client, or both, it should work regardless.
 
+## Changes in 1.0.1
+
+* Fixed certain objects being erroneously marked as transparent, causing them to fall through the floor
+
 ## Changes in 1.0.0
 
 Major rewrite for current Valheim:
